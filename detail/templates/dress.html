@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}- dress{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            {% for dress in dresss %}
+            <div class="col-sm-6">
+                <div class="card mb-3">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <img class="card-img-top embed-responsive-item" src="{{ dress.image.url }}" width="200" alt="{{ bottom }}" />
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-outline-dark float-rigth">{{ dress.name }} :{{ dress.price }}원</span>
+                        <h3 class="card-title h4">{{ dress.about }}</h3>
+                        <a class="btn btn-outline-dark" href="{{ bottom.get_absolute_url }}">구입하기 →</a>
+                    </div>
+                <div class="card-footer">
+                    <div class="small text-muted"></div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

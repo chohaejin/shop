@@ -1,0 +1,55 @@
+<!doctype html>
+<head>
+<div class=container">
+  <header class="header clearfix">
+    <nav class=""navbar navbar-expand-lg navbar-light bg-light">
+        <h2><p class="text-capitalize"><p class="text-center" style="color:rgb(80,80,80)"><strong>Shopping Mall</strong></p></p></h2>
+        <ul class="nav">
+          <li class="nav-item"><a href="/" class="active nav-link" style="color:rgb(134,134,134)">Home</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a href="#" class="nav-link" style="color:rgb(134,134,134)">Welcome, {{user.get_username}}님</a></li>
+          <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link " style="color:rgb(134,134,134)">Logout</a></li>
+          {% else %}
+          <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link" style="color:rgb(134,134,134)">Login</a></li>
+          <li class="nav-item"><a href="{% url 'accounts:register' %}" class="nav-link" style="color:rgb(134,134,134)">Signup</a></li>
+          {% endif %}
+            <li class="nav-item"><a href="{% url 'detail:out' %}" class="nav-link" style="color:rgb(134,134,134)">outer</a></li>
+            <li class="nav-item"><a href="{% url 'detail:to' %}" class="nav-link" style="color:rgb(134,134,134)">top</a></li>
+            <li class="nav-item"><a href="{% url 'detail:bott' %}" class="nav-link" style="color:rgb(134,134,134)">bottom</a></li>
+            <li class="nav-item"><a href="{% url 'detail:dre' %}" class="nav-link" style="color:rgb(134,134,134)">dress</a></li>
+        </ul>
+    </nav>
+  </header>
+  {% block content %}
+  {% endblock %}
+</div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container">
+        <div class="row">
+            {% for good in goods %}
+            <div class="col-sm-6">
+                <div class="card mb-3">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <img class="card-img-top embed-responsive-item" src="{{ good.image.url }}" width="400" alt="{{ good }}" />
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-outline-dark float-rigth">{{ good.name }} :{{ good.price }}원</span>
+                        <h3 class="card-title h4">{{ good.about }}</h3>
+                        <a class="btn btn-outline-dark" href="{{ good.get_absolute_url }}">구입하기 →</a>
+                    </div>
+                <div class="card-footer">
+                    <div class="small text-muted"></div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
